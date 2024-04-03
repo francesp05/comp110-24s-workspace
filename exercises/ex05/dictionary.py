@@ -7,9 +7,10 @@ def invert(a: dict[str, str]) -> dict[str, str]:
     """Inverts the keys and values of given dictionary."""
     b: dict[str, str] = {}
     for x in a:
-        b[a[x]] = x
-        if a[x] == x:
+        if a[x] in b:
             raise KeyError("Error! Multiple keys.")
+        else:
+            b[a[x]] = x
     return b
 
         
@@ -32,6 +33,26 @@ def count(list_a: list[str]) -> dict[str, int]:
         else:
             dict1[x] = 1
     return dict1
+
+
+def alphabetizer(words: list[str]) -> dict[str, list[str]]:
+    """Create a dictionary with letters as the keys and words starting with that letter as the values."""
+    categorized = {}
+    for word in words:
+        if word[0].lower() not in words:
+            categorized[word[0].lower()] = [word]
+        else: 
+            categorized[word[0].lower()].append(word)
+    return categorized
+
+
+def update_attendance(dict1: dict[str, list[str]], day: str, student: str) -> None:
+    """Create and attendance log from the day a student attended."""
+    if day not in dict1:
+        if student not in dict1[day]:
+            dict1[day] = []
+    else:
+        dict1[day] = [student]
 
 
 def alphabetizer(words: list[str]) -> dict[str, list[str]]:
